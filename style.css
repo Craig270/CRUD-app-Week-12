@@ -1,11 +1,15 @@
-body {
-  background-color: white;
+.body {
+  background-color: rgb(105, 98, 98);
+
+
 }
 #jumbo {
   background-color: #30373b;
-  color: white;
+  
+  background-image: url('covidimg.jpg');
+  background-size: cover;
 
-  opacity: 90%;
+
 }
 h1 {
   text-align: center;
@@ -15,4 +19,11 @@ p {
 }
 .table-dark {
   padding: 5%;
+}
+.links{
+  font-size: 30px;
+  color: aliceblue;
+}
+.links:hover{
+  color:#364F6D;
 }
