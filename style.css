@@ -1,0 +1,18 @@
+body {
+  background-color: white;
+}
+#jumbo {
+  background-color: #30373b;
+  color: white;
+
+  opacity: 90%;
+}
+h1 {
+  text-align: center;
+}
+p {
+  text-align: center;
+}
+.table-dark {
+  padding: 5%;
+}
