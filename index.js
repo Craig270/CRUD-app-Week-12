@@ -25,3 +25,5 @@ function display(cases){
 
 /*testing adding comment to js file*/
 
+let newVarb = "This is crazy";
+let newVarb2 = [ 1, 2 ,3 ,4, 5];
