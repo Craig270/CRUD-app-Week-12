@@ -5,13 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid Tracker</title>
-    <link rel="stylesheet" href="index.css" />
-    <link
-      href="node_modules/bootstrap/dist/css/bootstrap.css"
+    <link rel="stylesheet" href="style.css" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css"
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="body">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">COVID-19 Tracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Track My State<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Symptom Tracker</a>
+          </li>
+          
+          </li>
+          
+      </div>
+    </nav>
     <div class="jumbotron" id="jumbo">
       <h1 id="jumbo">COVID 19 Tracker</h1>
       <p id="jumbo">Statistics updated daily</p>
@@ -48,18 +66,18 @@
     <div class="container">
       <div class="row">
         <div class="col-sm">
-          <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">
+          <a class="links" href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">
             CDC COVID Info</a
           >
         </div>
         <div class="col-sm">
-          <a
+          <a class="links"
             href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
             >World Health Organization COVID Info</a
           >
         </div>
         <div class="col-sm">
-          <a
+          <a class="links"
             href="https://www.arapahoe.edu/about-acc/college-leadership/information-about-covid-19"
             >Arapahoe Community College COVID Info</a
           >
