@@ -1,6 +1,9 @@
 "use strict";
 
-$.get("https://disease.sh/v3/covid-19/all", (cases) => display(cases));
+$.get("https://disease.sh/v3/covid-19/states{colorado}", (cases) =>
+  display(cases)
+);
+
 function display(cases) {
   console.log(cases);
   for (let i = 0; i < cases.length; i++) {
