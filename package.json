@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Craig270/CRUD-app-Week-12#readme",
   "dependencies": {
+    "ajax": "0.0.4",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0"
   }
