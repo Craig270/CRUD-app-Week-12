@@ -1,14 +1,14 @@
 "use strict";
+//temp comment out lines 2-11 while working on layout
+// $.get("https://disease.sh/v3/covid-19/states", (cases) => display(cases));
 
-$.get("https://disease.sh/v3/covid-19/states", (cases) => display(cases));
-
-function display(cases) {
-  console.log(cases);
-  for (let i = 0; i < cases.length; i++) {
-    let cases = `<tr><td>${cases[i].cases}</td><td>${cases[i].recovered}</td><td>${cases[i].deaths}</td><td>${cases[i].tests}</td></tr>`;
-    $("#covid-table").append(cases);
-  }
-}
+// function display(cases) {
+//   console.log(cases);
+//   for (let i = 0; i < cases.length; i++) {
+//     let cases = `<tr><td>${cases[i].cases}</td><td>${cases[i].recovered}</td><td>${cases[i].deaths}</td><td>${cases[i].tests}</td></tr>`;
+//     $("#covid-table").append(cases);
+//   }
+// }
 
 // setting up user tracking list
 //1b use a form to add new entities: which locations do they want to track
@@ -41,7 +41,7 @@ class MyTrackingList {
   }
   
   deleteLocation(location) {
-    let index = this.location.indexOf(locations);
+    let index = this.locations.indexOf(location);
     this.locations.splice(index, 1);
   }
 }
@@ -80,7 +80,7 @@ class MyTrackingList {
 
 //send data entered to an API
 class CovidTracking {
-  static url = "";//need to find location to send info to//
+  static url = "";//need to find location to send info to//root URL for all API end points
 
   static getAllLists() {
     return $.get(this.url);
@@ -116,15 +116,70 @@ class CovidTracking {
 class DOMManager {
   static lists;
 
+  //get all current lists
   static getAllLists() {
     CovidTracking.getAllLists().then(lists => this.render(lists));
   }
 
+  //create a new list, promise comes back and rerender the DOM
+  static createList(name) {
+    CovidTracking.createList(new List(name))
+    .then(() => { //handle promise
+      return CovidTracking.getAllLists();
+    })
+    .then((lists) => this.render(lists));//rerender the DOM after change
+  }
+
+  //delete a list and rerender the DOM
+  static deleteList(id) {
+    CovidTracking.deleteList(id)
+      .then(() => { //handle promise
+        return CovidTracking.getAllLists();
+      })
+      .then((lists) => this.render(lists));//rerender the DOM after change
+  }
+
+  static addLocations(id) {
+    for (let list of this.lists) {
+      if (list._id == id) { //._id is assigned by the API
+        list.locations.push(new Location($(`#${list._id}-location-name`).val(), 
+        $(`#${list._id}-location-cases`).val(),
+        $(`#${list._id}-location-recovered`).val(),
+        $(`#${list._id}-location-deaths`).val(),
+        $(`#${list._id}-location-tests`).val()));
+        CovidTracking.updateList(list) 
+          .then(() => { //handle promise
+            return CovidTracking.getAllLists();
+          })
+          .then((lists) => this.render(lists));//rerender the DOM after change
+      
+      }
+    }
+  }
+
+  static deleteLocations(listId, locationId) {
+    for (let list of this.lists) {
+      if (list._id == listId) {
+        for (let location of list.locations) {
+          if (locations._id == locationId) {
+            list.locations.splice(list.locations.indexOf(location), 1);
+            CovidTracking.updateList(list)
+              .then(() => {
+                return CovidTracking.getAllLists();
+              })
+              .then((lists) => this.render(lists));
+          }
+        }
+      }
+    }
+  }  
+  
+  //list interface
   static render(lists) {
     this.lists = lists;
-    $("#trackApp").empty();
+    $('#trackApp').empty();
     for (let list of lists) {
-      $("#trackApp").prepend(
+      $('#trackApp').prepend(
         `<div id="${list._id}" class="card">
           <div class="card-header">
             <h2>${list.name}</h2>
@@ -138,11 +193,30 @@ class DOMManager {
               <button id="${list._id}-new-list" onclick="DOMManager.addLocation('${list._id}')" class="btn btn-primary form-control">Add</button>
             </div>
           </div>
-        </div>`
+        </div><br>`
       );
+      for (let location of list.locations) {
+        $(`#${list._id}`).find('.card-body').append(
+          `<p>
+            <span id="name-${location._id}"><strong>Location: </strong> ${location.name}</span>
+            <span id="name-${location._id}"><strong>Cases: </strong> ${location.cases}</span>
+            <span id="name-${location._id}"><strong>Recovered: </strong> ${location.recovered}</span>
+            <span id="name-${location._id}"><strong>Deaths: </strong> ${location.deaths}</span>
+            <span id="name-${location._id}"><strong>Tests: </strong> ${location.tests}</span>
+            <button class="btn btn-danger" onclick="DOMManager.deleteRoom('${list._id}', '${locations._id}')">Delete Location</button>
+          </p>`);
+        
+      }
     }
   }
 
 }
 
+//button code to create new list and set field back to clear
+$('#create-new-list').onclick(() => {
+  DOMManager.createList($('#new-list-name').val());
+  $('new-list-name').val('');
+});
+
+DOMManager.getAllLists();
 
