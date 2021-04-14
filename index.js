@@ -1,14 +1,54 @@
 "use strict";
-//temp comment out lines 2-11 while working on layout
-// $.get("https://disease.sh/v3/covid-19/states", (cases) => display(cases));
 
-// function display(cases) {
-//   console.log(cases);
-//   for (let i = 0; i < cases.length; i++) {
-//     let cases = `<tr><td>${cases[i].cases}</td><td>${cases[i].recovered}</td><td>${cases[i].deaths}</td><td>${cases[i].tests}</td></tr>`;
-//     $("#covid-table").append(cases);
-//   }
-// }
+//api url
+const api_url = "https://disease.sh/v3/covid-19/states";
+
+//Defining async function
+async function getapi(url) {
+    //Storing response
+    const response = await fetch(url);
+
+    //Storing data in the form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+      hideloader();
+    }
+    show(data);
+}
+//Calling that async function
+getapi(api_url);
+
+//Function to hide the loader
+function hideloader() {
+  document.getElementById('loading').style.display = 'none';
+}
+
+//Function to define innerHTML for HTML table
+function show(data) {
+  let tab = 
+    `<tr>
+      <th>State</th>
+      <th>Cases</th>
+      <th>Recovered</th>
+      <th>Deaths</th>
+      <th>Tests</th>
+    </tr>`;
+
+  //Loop to access all rows
+  for (let i = 0; i < data.length; i++) {
+    tab += `<tr
+      <td>${i.state}</td>
+      <td>${i.cases}</td>
+      <td>${i.recovered}</td>
+      <td>${i.deaths}</td>
+      <td>${i.tests}</td>
+    </tr>`;
+    console.log(tab);
+  };
+  //Setting innerHTML as tab variable
+  document.getElementById("location-table").innerHTML = tab;
+}
 
 // setting up user tracking list
 //1b use a form to add new entities: which locations do they want to track
@@ -46,41 +86,9 @@ class MyTrackingList {
   }
 }
 
-// I think the functions used to create the forms/lists in previous assignment are not needed but keeping for now
-// let lists = [];
-// let listsId = 0;
-
-// window.onload = function() {
-//   document.getElementById("new-list-name").focus();
-// }
-
-// function onClick(id, action){
-//   let element = document.getElementById(id);
-//   element.addEventListener("click", action);
-//   return element;
-// }
-
-// /*Some sort of jQuery like this-- ($("#entry").checkValidity()); -- to be incorporated to keep onClick from overridng HTML 'required'*/
-
-// onClick("new-list", () => {
-//   lists.push(new MyTrackingList(listId++, getValue("new-list-name")));
-//   drawDOM();
-// });
-
-// function getValue(id) {
-//   return document.getElementById(id).value;
-// }
-
-// function clearElement(element) {
-//   while(element.firstChild) {
-//     element.removeChild(element.firstChild);
-//   }
-// }
-
-
 //send data entered to an API
 class CovidTracking {
-  static url = "";//need to find location to send info to//root URL for all API end points
+  static url = "https://";//need to find location to send info to//root URL for all API end points
 
   static getAllLists() {
     return $.get(this.url);
@@ -123,7 +131,7 @@ class DOMManager {
 
   //create a new list, promise comes back and rerender the DOM
   static createList(name) {
-    CovidTracking.createList(new List(name))
+    CovidTracking.createList(new MyTrackingList(name))
     .then(() => { //handle promise
       return CovidTracking.getAllLists();
     })
@@ -158,7 +166,7 @@ class DOMManager {
   }
 
   static deleteLocations(listId, locationId) {
-    for (let list of this.lists) {
+    for (let list of this.list) {
       if (list._id == listId) {
         for (let location of list.locations) {
           if (locations._id == locationId) {
@@ -173,7 +181,7 @@ class DOMManager {
       }
     }
   }  
-  
+
   //list interface
   static render(lists) {
     this.lists = lists;
@@ -195,7 +203,7 @@ class DOMManager {
           </div>
         </div><br>`
       );
-      for (let location of list.locations) {
+      for (let location of list.location) {
         $(`#${list._id}`).find('.card-body').append(
           `<p>
             <span id="name-${location._id}"><strong>Location: </strong> ${location.name}</span>
@@ -213,9 +221,9 @@ class DOMManager {
 }
 
 //button code to create new list and set field back to clear
-$('#create-new-list').onclick(() => {
+$('#create-new-list').on("click",() => {
   DOMManager.createList($('#new-list-name').val());
-  $('new-list-name').val('');
+  $('#new-list-name').val('');
 });
 
 DOMManager.getAllLists();

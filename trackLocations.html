@@ -48,16 +48,29 @@
 
     
     <div class="container">
-        <div id="new-list" class="jumbotron">
-            <h2>New List</h2>
-            <input type="text" id="new-list-name" class="form-control"> <br>
-            <button id="create-new-list" class="btn btn-primary form-control">Create</button>
-        </div>
+      <div id="new-list" class="jumbotron">
+        <h2>New List</h2>
+        <input type="text" id="new-list-name" class="form-control"> <br>
+        <button id="create-new-list" class="btn btn-primary form-control">Create</button>
+      </div>
 
-        <!--div to add elements from the JS file-->
-        <div id="trackApp">
-
+        <!-- Here a loader is created which loads till response comes -->
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="loading">
+        <span class="sr-only">Loading...</span>
         </div>
+      </div>
+      <!--div to add list of states from API-->
+      <div>
+        <table id="location-table">
+          
+        </table>
+      </div>
+
+      <!--div to add elements from the JS file-->
+      <div id="trackApp">
+
+      </div>
     </div>
 
     <!-- NON BOOTSTRAP TABLE TO TEST API INJECT!-->
