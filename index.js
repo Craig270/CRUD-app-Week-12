@@ -1,54 +1,7 @@
 "use strict";
 
-//api url
-const api_url = "https://disease.sh/v3/covid-19/states";
-
-//Defining async function
-async function getapi(url) {
-    //Storing response
-    const response = await fetch(url);
-
-    //Storing data in the form of JSON
-    var data = await response.json();
-    console.log(data);
-    if (response) {
-      hideloader();
-    }
-    show(data);
-}
-//Calling that async function
-getapi(api_url);
-
-//Function to hide the loader
-function hideloader() {
-  document.getElementById('loading').style.display = 'none';
-}
 
 //Function to define innerHTML for HTML table
-function show(data) {
-  let tab = 
-    `<tr>
-      <th>State</th>
-      <th>Cases</th>
-      <th>Recovered</th>
-      <th>Deaths</th>
-      <th>Tests</th>
-    </tr>`;
-
-  //Loop to access all rows
-  for (let i = 0; i < data.length; i++) {
-    tab += `<tr
-      <td>${i.state}</td>
-      <td>${i.cases}</td>
-      <td>${i.recovered}</td>
-      <td>${i.deaths}</td>
-      <td>${i.tests}</td>
-    </tr>`;
-    console.log(tab);
-  };
-  //Setting innerHTML as tab variable
-  document.getElementById("location-table").innerHTML = tab;
-}
 
 // setting up user tracking list
 //1b use a form to add new entities: which locations do they want to track

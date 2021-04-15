@@ -1,101 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Covid Tracker</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-  </head>
-  <body class="body">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">COVID-19 Tracker</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="trackLocations.html">Track My State<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Symptom Tracker</a>
-          </li>
-          
-          </li>
-          
-      </div>
-    </nav>
-    <div class="jumbotron" id="jumbo">
-      <h1 id="jumbo">COVID 19 Tracker</h1>
-      <p id="jumbo">Statistics updated daily</p>
-    </div>
-    <table class="table table-dark" id="covid-table">
-      <thead>
-        <tr>
-          <th scope="col">Cases</th>
-          <th scope="col">Recovered</th>
-          <th scope="col">Deaths</th>
-          <th scope="col">Tests</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr></tr>
-      </tbody>
-    </table>
-
-    <!-- Here a loader is created which loads till response comes -->
-    <div class="d-flex justify-content-center">
-    <div class="spinner-border" role="status" id="loading">
-        <span class="sr-only">Loading...</span>
-    </div>
-
-    <div>
-      <table id="location-table">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>One Word</title>
+    </head>
+    <body>
+        <table id="customer-table">
+            <tr>
+                <th>Name</th>
+                <th>Avatar</th>
+                <th>What is your One Word?</th>
+            </tr>
+        </table>
         
-      </table>
-    </div>
-
-    <!-- NON BOOTSTRAP TABLE TO TEST API INJECT!-->
-
-    <!-- <table id="covid-table">
-          <tr>
-              <th>Cases</th>
-              <th>Recovered</th>
-              <th>Deaths</th>
-              <th>Tests</th>
-         </tr>
-         <tr>
-             <td>
-             </td>
-         </tr>
-      </table> -->
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <a class="links" href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">
-            CDC COVID Info</a
-          >
-        </div>
-        <div class="col-sm">
-          <a class="links"
-            href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
-            >World Health Organization COVID Info</a
-          >
-        </div>
-        <div class="col-sm">
-          <a class="links"
-            href="https://www.arapahoe.edu/about-acc/college-leadership/information-about-covid-19"
-            >Arapahoe Community College COVID Info</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="index.js"></script>
-  </body>
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="oneword.js"></script>
+    </body>
 </html>
