@@ -1,10 +1,9 @@
-$.get("https://retoolapi.dev/wjOUHo/oneword?Name=value", (data) => addCustomers(data.data));
+$.get("https://retoolapi.dev/A3H52c/oneword", (Name,Word,Avatar) => addCustomers(Name,Word,Avatar));
 
-//also tried "https://retoolapi.dev/wjOUHo/oneword" but I'm still not calling the data names correctly
 function addCustomers(response) {
     let newRow = "";
     $.each(response, function (i, item) {
-        newRow += "<tr><td>" + item.Name + "</td><td>" + item.Avatar + "</td><td>" + item.WhatisyourOneWord + "</td></tr>"
+        newRow += "<tr><td>" + item.Name + "</td><td>" + item.Avatar + "</td><td>" + item.Word + "</td></tr>"
     });
     console.log(newRow);
     $("#customer-table").append(newRow);
