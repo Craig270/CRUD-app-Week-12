@@ -88,7 +88,7 @@ class MyTrackingList {
 
 //send data entered to an API
 class CovidTracking {
-  static url = "https://";//need to find location to send info to//root URL for all API end points
+  static url = "https://crudcrud.com/api/e16d480f4d4141b39b51fd5cbfc548d2/todo";//need to find location to send info to//root URL for all API end points
 
   static getAllLists() {
     return $.get(this.url);
@@ -186,7 +186,7 @@ class DOMManager {
   static render(lists) {
     this.lists = lists;
     $('#trackApp').empty();
-    for (let list of lists) {
+    for (let list of this.lists) {
       $('#trackApp').prepend(
         `<div id="${list._id}" class="card">
           <div class="card-header">
