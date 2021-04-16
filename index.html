@@ -4,17 +4,32 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>One Word</title>
+        <!-- <link rel="stylesheet" href="style.css" /> -->
+        <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     </head>
-    <body>
+    <body class="container">
+        <div id="new-user" class="jumbotron">
+            <h2>New User</h2>
+            <input type="text" id="new-user-name" class="form-control"> <br>
+            <button id="create-new-user" class="btn btn-primary form-control">Create</button>
+
+        </div>
+
+        <div id="app">
+
+        <!-- </div>
         <table id="customer-table">
             <tr>
                 <th>Name</th>
                 <th>Avatar</th>
                 <th>What is your One Word?</th>
             </tr>
-        </table>
+        </table> -->
+
+
         
         <script src="node_modules/jquery/dist/jquery.js"></script>
         <script src="oneword.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     </body>
 </html>
