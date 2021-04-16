@@ -13,7 +13,7 @@
 //1b use a form to add new entities
 class User {
     constructor(name) {
-      this.Name = name;
+      this.name = name;
       this.words = [];
     }
   
@@ -32,7 +32,7 @@ class Word {
 
 //send data entered to an API
 class OneWord {
-    static url = "https://retoolapi.dev/A3H52c/oneword";
+    static url = "https://ancient-taiga-31359.herokuapp.com/api/houses";
 
     static getAllUsers() {
         return $.get(this.url);
